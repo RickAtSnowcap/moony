@@ -1,0 +1,26 @@
+.public-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 30px;
+}
+
+.public-result {
+  margin-top: 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 20px;
+}
+
+.public-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.public-result-meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}

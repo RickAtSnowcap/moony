@@ -12,18 +12,28 @@ public sealed class ScanRepository
         _connectionString = connectionString;
     }
 
-    public async Task<long> SaveScanAsync(string rawLog, ParsedScan parsed, CancellationToken ct)
+    public async Task<int> CountBySystemAsync(string system, CancellationToken ct)
+    {
+        await using var conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync(ct);
+        await using var cmd = new NpgsqlCommand("SELECT moony.fn_scan_count_by_system(@sys)", conn);
+        cmd.Parameters.AddWithValue("sys", system);
+        return Convert.ToInt32(await cmd.ExecuteScalarAsync(ct));
+    }
+
+    public async Task<long> SaveScanAsync(string rawLog, ParsedScan parsed, string name, CancellationToken ct)
     {
         await using var conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync(ct);
         await using var tx = await conn.BeginTransactionAsync(ct);
 
         // Insert scan
-        await using var scanCmd = new NpgsqlCommand("SELECT moony.fn_scan_insert(@raw, @fmt, @cnt, @rar)", conn, tx);
+        await using var scanCmd = new NpgsqlCommand("SELECT moony.fn_scan_insert(@raw, @fmt, @cnt, @rar, @name)", conn, tx);
         scanCmd.Parameters.AddWithValue("raw", rawLog);
         scanCmd.Parameters.AddWithValue("fmt", parsed.FormattedOutput);
         scanCmd.Parameters.AddWithValue("cnt", parsed.Moons.Count);
         scanCmd.Parameters.AddWithValue("rar", parsed.MaxRarity);
+        scanCmd.Parameters.AddWithValue("name", name);
         var scanId = (long)(await scanCmd.ExecuteScalarAsync(ct))!;
 
         foreach (var moon in parsed.Moons)
@@ -74,9 +84,10 @@ public sealed class ScanRepository
             results.Add(new ScanSummary
             {
                 ScanId = reader.GetInt64(0),
-                MoonCount = reader.GetInt32(1),
-                MaxRarity = reader.GetInt32(2),
-                SubmittedAt = reader.GetDateTime(3)
+                Name = reader.GetString(1),
+                MoonCount = reader.GetInt32(2),
+                MaxRarity = reader.GetInt32(3),
+                SubmittedAt = reader.GetDateTime(4)
             });
         }
         return results;
@@ -96,11 +107,12 @@ public sealed class ScanRepository
         var detail = new ScanDetail
         {
             ScanId = scanReader.GetInt64(0),
-            RawLog = scanReader.GetString(1),
-            FormattedOutput = scanReader.GetString(2),
-            MoonCount = scanReader.GetInt32(3),
-            MaxRarity = scanReader.GetInt32(4),
-            SubmittedAt = scanReader.GetDateTime(5)
+            Name = scanReader.GetString(1),
+            RawLog = scanReader.GetString(2),
+            FormattedOutput = scanReader.GetString(3),
+            MoonCount = scanReader.GetInt32(4),
+            MaxRarity = scanReader.GetInt32(5),
+            SubmittedAt = scanReader.GetDateTime(6)
         };
         await scanReader.CloseAsync();
 
@@ -150,6 +162,7 @@ public sealed class ScanRepository
 public sealed class ScanSummary
 {
     public long ScanId { get; set; }
+    public string Name { get; set; } = "";
     public int MoonCount { get; set; }
     public int MaxRarity { get; set; }
     public DateTime SubmittedAt { get; set; }
@@ -158,6 +171,7 @@ public sealed class ScanSummary
 public sealed class ScanDetail
 {
     public long ScanId { get; set; }
+    public string Name { get; set; } = "";
     public string RawLog { get; set; } = "";
     public string FormattedOutput { get; set; } = "";
     public int MoonCount { get; set; }

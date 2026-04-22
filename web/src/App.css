@@ -22,26 +22,6 @@
   font-size: 0.9rem;
 }
 
-.app-layout {
-  display: flex;
-  flex: 1;
-  gap: 0;
-}
-
-.app-main {
-  flex: 1;
-  padding: 24px 30px;
-  min-width: 0;
-}
-
-.app-sidebar {
-  width: 300px;
-  border-left: 1px solid var(--border);
-  padding: 24px 20px;
-  background: var(--bg-surface);
-  overflow-y: auto;
-}
-
 .error-message {
   background: rgba(231, 76, 60, 0.15);
   border: 1px solid #e74c3c;

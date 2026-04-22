@@ -35,7 +35,7 @@ export default function ScanHistory({ scans, onSelect }: Props) {
       {scans.map(scan => (
         <div key={scan.scan_id} className="history-item" onClick={() => onSelect(scan.scan_id)}>
           <div className="history-top">
-            <span className="history-id">#{scan.scan_id}</span>
+            <span className="history-id">{scan.name || `#${scan.scan_id}`}</span>
             <span className={`rarity-badge ${rarityClass(scan.max_rarity)}`}>
               {rarityLabel(scan.max_rarity)}
             </span>

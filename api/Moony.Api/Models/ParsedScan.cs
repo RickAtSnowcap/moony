@@ -27,4 +27,5 @@ public sealed class ParsedScan
     public List<ParsedMoon> Moons { get; set; } = new();
     public string FormattedOutput { get; set; } = "";
     public int MaxRarity { get; set; }
+    public string FirstSystem { get; set; } = "";
 }

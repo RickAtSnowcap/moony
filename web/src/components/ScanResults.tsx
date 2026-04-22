@@ -7,6 +7,7 @@ interface Props {
   moonCount: number;
   maxRarity: number;
   scanId: number;
+  scanName?: string;
   detail?: ScanDetail;
   onViewDetail?: () => void;
 }
@@ -24,7 +25,7 @@ function rarityLabel(rarity: number): string {
   return rarity > 0 ? `R${rarity}` : 'R0';
 }
 
-export default function ScanResults({ formattedOutput, moonCount, maxRarity, scanId, detail, onViewDetail }: Props) {
+export default function ScanResults({ formattedOutput, moonCount, maxRarity, scanId, scanName, detail, onViewDetail }: Props) {
   const [copied, setCopied] = useState(false);
   const [expandedMoons, setExpandedMoons] = useState<Set<number>>(new Set());
 
@@ -46,7 +47,7 @@ export default function ScanResults({ formattedOutput, moonCount, maxRarity, sca
   return (
     <div className="scan-results">
       <div className="results-header">
-        <h2>Scan #{scanId}</h2>
+        <h2>{scanName || `Scan #${scanId}`}</h2>
         <span className="results-meta">
           {moonCount} moon{moonCount !== 1 ? 's' : ''} •
           Max: <span className={`rarity ${rarityClass(maxRarity)}`}>{rarityLabel(maxRarity)}</span>

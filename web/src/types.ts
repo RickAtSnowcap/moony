@@ -1,5 +1,6 @@
 export interface ScanSummary {
   scan_id: number;
+  name: string;
   moon_count: number;
   max_rarity: number;
   submitted_at: string;
@@ -26,6 +27,7 @@ export interface MoonDetail {
 
 export interface ScanDetail {
   scan_id: number;
+  name: string;
   raw_log: string;
   formatted_output: string;
   moon_count: number;
@@ -36,6 +38,7 @@ export interface ScanDetail {
 
 export interface ScanCreateResponse {
   scan_id: number;
+  name: string;
   moon_count: number;
   max_rarity: number;
   formatted_output: string;

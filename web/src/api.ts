@@ -15,14 +15,27 @@ export async function submitScan(rawLog: string): Promise<ScanCreateResponse> {
   return resp.json();
 }
 
-export async function listScans(limit = 20, offset = 0): Promise<ScanSummary[]> {
-  const resp = await fetch(`${BASE}/api/scans?limit=${limit}&offset=${offset}`);
+export async function listScans(password: string, limit = 20, offset = 0): Promise<ScanSummary[]> {
+  const resp = await fetch(`${BASE}/api/scans?limit=${limit}&offset=${offset}`, {
+    headers: { 'X-Admin-Password': password }
+  });
   if (!resp.ok) throw new Error('Failed to load scans');
   return resp.json();
 }
 
-export async function getScan(id: number): Promise<ScanDetail> {
-  const resp = await fetch(`${BASE}/api/scans/${id}`);
+export async function getScan(id: number, password: string): Promise<ScanDetail> {
+  const resp = await fetch(`${BASE}/api/scans/${id}`, {
+    headers: { 'X-Admin-Password': password }
+  });
   if (!resp.ok) throw new Error('Failed to load scan');
   return resp.json();
+}
+
+export async function checkPassword(password: string): Promise<boolean> {
+  const resp = await fetch(`${BASE}/api/auth`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password })
+  });
+  return resp.ok;
 }

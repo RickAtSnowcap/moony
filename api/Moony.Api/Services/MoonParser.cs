@@ -21,6 +21,7 @@ public static class MoonParser
         var moons = new List<ParsedMoon>();
         ParsedMoon? currentMoon = null;
         var oreOrder = 0;
+        string? firstSystem = null;
 
         for (var i = 0; i < lines.Length; i++)
         {
@@ -36,6 +37,7 @@ public static class MoonParser
                 currentMoon = ParseMoonHeader(line);
                 if (currentMoon != null)
                 {
+                    firstSystem ??= currentMoon.SolarSystem;
                     moons.Add(currentMoon);
                     oreOrder = 0;
                 }
@@ -70,7 +72,8 @@ public static class MoonParser
         {
             Moons = moons,
             FormattedOutput = formatted,
-            MaxRarity = maxRarity
+            MaxRarity = maxRarity,
+            FirstSystem = firstSystem ?? ""
         };
     }
 
