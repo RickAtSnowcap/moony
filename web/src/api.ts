@@ -1,6 +1,6 @@
 import type { ScanSummary, ScanDetail, ScanCreateResponse } from './types';
 
-const BASE = '';  // proxied in dev, same-origin in prod
+const BASE = '/moony';  // app lives at /moony/, Caddy strips prefix before proxying
 
 export async function submitScan(rawLog: string): Promise<ScanCreateResponse> {
   const resp = await fetch(`${BASE}/api/scans`, {
