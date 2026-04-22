@@ -1,0 +1,173 @@
+.scan-results {
+  margin-top: 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 20px;
+}
+
+.results-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.results-header h2 {
+  font-size: 1.1rem;
+}
+
+.results-meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.formatted-section {
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.section-header h3 {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.copy-btn {
+  padding: 4px 14px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8rem;
+}
+
+.copy-btn:hover {
+  color: var(--text-primary);
+}
+
+.formatted-output {
+  width: 100%;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.detail-section h3 {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.moon-row {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.moon-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.moon-header:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.expand-icon {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  width: 14px;
+}
+
+.moon-name {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.rarity-badge {
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.rarity-badge.r64 { background: rgba(255, 215, 0, 0.15); color: var(--r64); }
+.rarity-badge.r32 { background: rgba(155, 89, 182, 0.15); color: var(--r32); }
+.rarity-badge.r16 { background: rgba(52, 152, 219, 0.15); color: var(--r16); }
+.rarity-badge.r8 { background: rgba(46, 204, 113, 0.15); color: var(--r8); }
+.rarity-badge.r4 { background: rgba(149, 165, 166, 0.15); color: var(--r4); }
+.rarity-badge.r0 { background: rgba(102, 102, 102, 0.15); color: var(--r0); }
+
+.ore-list {
+  border-top: 1px solid var(--border);
+  padding: 8px 14px 8px 38px;
+}
+
+.ore-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+}
+
+.ore-name {
+  flex: 1;
+}
+
+.ore-pct {
+  font-weight: 600;
+  min-width: 40px;
+  text-align: right;
+}
+
+.ore-rarity {
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 32px;
+}
+
+/* Rarity text colors */
+.rarity.r64, .r64 { color: var(--r64); }
+.rarity.r32, .r32 { color: var(--r32); }
+.rarity.r16, .r16 { color: var(--r16); }
+.rarity.r8 { color: var(--r8); }
+.rarity.r4 { color: var(--r4); }
+.rarity.r0 { color: var(--r0); }
+
+.view-detail-btn {
+  margin-top: 12px;
+  padding: 8px 20px;
+  background: transparent;
+  color: var(--r64);
+  border: 1px solid var(--r64);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.view-detail-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
