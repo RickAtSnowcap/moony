@@ -3,6 +3,7 @@ import type { ScanCreateResponse } from '../types';
 import { submitScan } from '../api';
 import ScanInput from './ScanInput';
 import './PublicPage.css';
+import './ScanResults.css';
 
 export default function PublicPage() {
   const [result, setResult] = useState<ScanCreateResponse | null>(null);
