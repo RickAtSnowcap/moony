@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ScanCreateResponse } from '../types';
 import { submitScan } from '../api';
+import { copyText } from '../copyText';
 import ScanInput from './ScanInput';
 import './PublicPage.css';
 import './ScanResults.css';
@@ -27,7 +28,7 @@ export default function PublicPage() {
 
   function handleCopy() {
     if (!result) return;
-    navigator.clipboard.writeText(result.formatted_output);
+    copyText(result.formatted_output);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }

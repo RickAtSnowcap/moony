@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ScanDetail } from '../types';
+import { copyText } from '../copyText';
 import './ScanResults.css';
 
 interface Props {
@@ -30,7 +31,7 @@ export default function ScanResults({ formattedOutput, moonCount, maxRarity, sca
   const [expandedMoons, setExpandedMoons] = useState<Set<number>>(new Set());
 
   function handleCopy() {
-    navigator.clipboard.writeText(formattedOutput);
+    copyText(formattedOutput);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
