@@ -112,13 +112,14 @@ public static class MoonParser
                 nonEmpty.Add(trimmed);
         }
 
-        if (nonEmpty.Count < 4) return null;
+        if (nonEmpty.Count < 3) return null;
 
         var oreType = nonEmpty[0];
         if (!double.TryParse(nonEmpty[1], System.Globalization.NumberStyles.Float,
             System.Globalization.CultureInfo.InvariantCulture, out var pctDecimal)) return null;
-        // nonEmpty[2] = Quantity (not used)
-        if (!int.TryParse(nonEmpty[3], out var oreTypeId)) return null;
+
+        // OreTypeID is at index 2 in real EVE scan data (no Quantity column)
+        if (!int.TryParse(nonEmpty[2], out var oreTypeId)) return null;
 
         var percentage = (int)Math.Round(pctDecimal * 100);
         var rarity = OreInfo.GetRarity(oreTypeId);
